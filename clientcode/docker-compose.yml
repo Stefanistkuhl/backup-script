@@ -1,0 +1,9 @@
+services:
+  backup:
+    container_name: backup-client
+    image: backup-client:latest
+    restart: no
+    volumes:
+        - ./gns3:/gns3
+        - ./test:/test
+        - /home/backup_gns3/.ssh/:/root/.ssh
