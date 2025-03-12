@@ -1,0 +1,8 @@
+{
+	"uploadDir":"/home/stefiii/coding/backup-script/servercode/upload",
+	"checkIntervall":"2s",
+	"generationCount":3,
+	"generationsDir":"/home/stefiii/coding/backup-script/servercode/gens",
+	"sshPort":22,
+	"atomicity":true
+}
