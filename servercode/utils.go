@@ -32,12 +32,12 @@ func checAndMakeDirs(config Config) {
 	if !uploadDirExists {
 		fmt.Println(config.GenerationsDir, " was not found and therefore created")
 		//give this proper perms
-		os.MkdirAll(config.UploadDir, 770)
+		os.MkdirAll(config.UploadDir, os.ModePerm)
 	}
 	if !generationsDirExists {
 		fmt.Println(config.GenerationsDir, " was not found and therefore created")
 		//give this proper perms
-		os.MkdirAll(config.GenerationsDir, 770)
+		os.MkdirAll(config.GenerationsDir, os.ModePerm)
 	}
 
 }
