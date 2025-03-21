@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
+	"strconv"
 )
 
 func loadConfig(file string) (Config, error) {
@@ -20,7 +22,7 @@ func loadConfig(file string) (Config, error) {
 	return config, nil
 }
 
-func checAndMakeDirs(config Config) {
+func checkAndMakeDirs(config Config) {
 	uploadDirExists, err := dirExists(config.UploadDir)
 	if err != nil {
 		panic(err)
@@ -31,14 +33,13 @@ func checAndMakeDirs(config Config) {
 	}
 	if !uploadDirExists {
 		fmt.Println(config.GenerationsDir, " was not found and therefore created")
-		//give this proper perms
 		os.MkdirAll(config.UploadDir, os.ModePerm)
 	}
 	if !generationsDirExists {
 		fmt.Println(config.GenerationsDir, " was not found and therefore created")
-		//give this proper perms
 		os.MkdirAll(config.GenerationsDir, os.ModePerm)
 	}
+	checkAndGenerateGenerationDirs(config)
 
 }
 
@@ -51,4 +52,19 @@ func dirExists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+func checkAndGenerateGenerationDirs(config Config) {
+	for i := range config.GenerationCount {
+		genDirPath := filepath.Join(config.GenerationsDir, config.GenerationsDirNamePrefix+strconv.Itoa(i))
+		genDirExists, err := dirExists(genDirPath)
+		if err != nil {
+			panic(err)
+		}
+		if !genDirExists {
+			fmt.Println(genDirPath, " was not found and therefore created")
+			os.MkdirAll(genDirPath, os.ModePerm)
+		}
+
+	}
 }

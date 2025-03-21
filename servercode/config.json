@@ -4,5 +4,6 @@
 	"generationCount":3,
 	"generationsDir":"/home/stefiii/coding/backup-script/servercode/gens",
 	"sshPort":22,
-	"atomicity":true
+	"atomicity":true,
+	"genDirPrefix":"gen-"
 }
